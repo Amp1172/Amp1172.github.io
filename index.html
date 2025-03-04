@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+</head>
+<body>
+    <h1>Library Books</h1>
+    <ul id="book-list"></ul>
+
+    <script>
+        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // แทนที่ด้วย URL ของ Google Apps Script ของคุณ
+
+        fetch(scriptURL + '?action=getBooks')
+            .then(response => response.json())
+            .then(data => {
+                const bookList = document.getElementById('book-list');
+                data.forEach(book => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `book_detail.html?id=${book.id}`;
+                    link.textContent = book.title;
+                    listItem.appendChild(link);
+                    bookList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
